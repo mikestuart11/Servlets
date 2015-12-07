@@ -1,5 +1,4 @@
-//import com.doing.more.java.appcontrol.ApplicationController;
-//import com.doing.more.java.appcontrol.Handler;
+
 import org.quickconnectfamily.json.JSONInputStream;
 import org.quickconnectfamily.json.JSONOutputStream;
 
@@ -18,7 +17,7 @@ public class JSONEchoServlet extends HttpServlet {
 
     public void init(){
         theAppController.mapCommand("Speak", new SpeakHandler());
-
+        theAppController.mapCommand("Console", new PrintToConsoleHandler());
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -27,7 +26,8 @@ public class JSONEchoServlet extends HttpServlet {
             JSONOutputStream outToClient = new JSONOutputStream(response.getOutputStream());
 
             // this is simulating if the server is not being reached
-            Thread.sleep(10000);
+//            Thread.currentThread().sleep(100000);
+
 
             HashMap<String, Object> dataMap = (HashMap) inFromClient.readObject();
             dataMap.put("toClient", outToClient);
